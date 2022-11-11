@@ -18,7 +18,8 @@ public class Application {
 
     public static void main(String args[]) {
         Account a;
-        Date d;
+        Calendar calendar = Calendar.getInstance();
+        Date d = calendar.getTime();
         double ret;
 
         a = new CheckingAccount("John Smith", 1500.0);
@@ -40,7 +41,15 @@ public class Application {
         }
 
         /* put your own tests here ....... */
-        
+        a = new SavingAccount("John Smith", 1500.0);
+
+        try {
+            ret = a.withdraw(600.00, d);
+            System.out.println("Account <" + a.name() + "> now has $" + ret + " balance\n");
+        } catch (Exception e) {
+            stdExceptionPrinting(e, a.balance());
+        }
+        /* 
         //if your implementaion is correct, you can do the following with polymorphicarray accountList
         Account[] accountList;
         
@@ -50,21 +59,22 @@ public class Application {
         // buid 4 different accounts in the same array
         accountList[0] = new CheckingAccount("John Smith", 1500.0);
         accountList[1] = new SavingAccount("William Hurt", 1200.0);
-        //accountList[2] = new CDAccount("Woody Allison", 1000.0);
-        //accountList[3] = new LoanAccount("Judi Foster", -1500.0);
+        accountList[2] = new CDAccount("Woody Allison", 1000.0);
+        accountList[3] = new LoanAccount("Judi Foster", -1500.0);
         
         // compute interest for all accounts
         for (int count = 0; count < accountList.length; count++) {
-            //double newBalance = accountList[count].computeInterest();
-            //System.out.println ("Account <" + a.name() + "> now has $" + newBalance + " balance\n");
+            double newBalance = accountList[count].computeInterest();
+            System.out.println ("Account <" + a.name() + "> now has $" + newBalance + " balance\n");
         }
-         
+        */
     }
-
+    
     static void stdExceptionPrinting(Exception e, double balance) {
         System.out.println("EXCEPTION: Banking system throws a " + e.getClass() +
                 " with message: \n\t" +
                 "MESSAGE: " + e.getMessage());
         System.out.println("\tAccount balance remains $" + balance + "\n");
     }
+    
 }

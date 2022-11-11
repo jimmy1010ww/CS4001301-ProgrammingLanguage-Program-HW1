@@ -25,8 +25,9 @@ class BankingException extends Exception {
 }
 
 interface BasicAccount {
+    //Account name
     String name();
-
+    //Account balance
     double balance();
 }
 
@@ -56,6 +57,23 @@ public abstract class Account {
     protected Date openDate;
     protected Date lastInterestDate;
 
+    Account(String s, double firstDeposit) {
+        accountName = s;
+        accountBalance = firstDeposit;
+        accountInterestRate = 0.12;
+        Calendar calendar = Calendar.getInstance();
+        openDate = calendar.getTime();
+        lastInterestDate = openDate;
+    }
+
+    Account(String s, double firstDeposit, Date firstDate) {
+        accountName = s;
+        accountBalance = firstDeposit;
+        accountInterestRate = 0.12;
+        openDate = firstDate;
+        lastInterestDate = openDate;
+    }
+
     // public methods for every bank accounts
     public String name() {
         return (accountName);
@@ -73,14 +91,16 @@ public abstract class Account {
     abstract double withdraw(double amount, Date withdrawDate) throws BankingException;
 
     public double withdraw(double amount) throws BankingException {
-        Date withdrawDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        Date withdrawDate = calendar.getTime();
         return (withdraw(amount, withdrawDate));
     }
 
     abstract double computeInterest(Date interestDate) throws BankingException;
 
     public double computeInterest() throws BankingException {
-        Date interestDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        Date interestDate = calendar.getTime();
         return (computeInterest(interestDate));
     }
 }
@@ -96,19 +116,11 @@ public abstract class Account {
 class CheckingAccount extends Account implements FullFunctionalAccount {
 
     CheckingAccount(String s, double firstDeposit) {
-        accountName = s;
-        accountBalance = firstDeposit;
-        accountInterestRate = 0.12;
-        openDate = new Date();
-        lastInterestDate = openDate;
+        super(s, firstDeposit);
     }
 
     CheckingAccount(String s, double firstDeposit, Date firstDate) {
-        accountName = s;
-        accountBalance = firstDeposit;
-        accountInterestRate = 0.12;
-        openDate = firstDate;
-        lastInterestDate = openDate;
+        super(s, firstDeposit, firstDate);
     }
 
     public double withdraw(double amount, Date withdrawDate) throws BankingException {
@@ -144,22 +156,15 @@ class CheckingAccount extends Account implements FullFunctionalAccount {
 class SavingAccount extends Account implements FullFunctionalAccount{
 
     SavingAccount(String s, double firstDeposit) {
-        accountName = s;
-        accountBalance = firstDeposit;
-        accountInterestRate = 0.12;
-        openDate = new Date();
-        lastInterestDate = openDate;
+        super(s, firstDeposit);
     }
 
     SavingAccount(String s, double firstDeposit, Date firstDate) {
-        accountName = s;
-        accountBalance = firstDeposit;
-        accountInterestRate = 0.12;
-        openDate = firstDate;
-        lastInterestDate = openDate;
+        super(s, firstDeposit, firstDate);
     }
 
     public double withdraw(double amount, Date withdrawDate) throws BankingException {
+        System.out.println(withdrawDate);
         // minimum balance is 0, raise exception if violated
         if ((accountBalance - (amount + 1)) < 0) {
             throw new BankingException("Underfraft from checking account name:" +

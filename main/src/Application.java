@@ -17,10 +17,10 @@ import java.util.*;
 public class Application {
 
     public static void main(String args[]) {
-        Account a;
+        Account a, b, c;
         Calendar calendar = Calendar.getInstance();
         Date d = calendar.getTime();
-        double ret;
+        double ret, ret1;
 
         a = new CheckingAccount("John Smith", 1500.0);
 
@@ -41,13 +41,33 @@ public class Application {
         }
 
         /* put your own tests here ....... */
-        a = new SavingAccount("John Smith", 1500.0);
+       
+        a = new SavingAccount("John Cena", 1500.00);
+        b = new CheckingAccount("John Smith", 1500.00);
+        
+        
+        System.out.println("Before => " + calendar.getTime());
+        calendar.add(Calendar.DATE, 30);
+        d = calendar.getTime();
+        System.out.println("After => " + calendar.getTime());
 
         try {
-            ret = a.withdraw(600.00, d);
+            ret = a.withdraw(1500, d);
+            ret1 = b.computeInterest(d);
             System.out.println("Account <" + a.name() + "> now has $" + ret + " balance\n");
+            System.out.println("Account <" + b.name() + "> now has $" + ret1 + " balance\n");
         } catch (Exception e) {
             stdExceptionPrinting(e, a.balance());
+            stdExceptionPrinting(e, b.balance());
+
+        }
+
+        c = new CDAccount("Jimmy Hua", 5000, 12);
+        try {
+            ret = c.deposit(1500);
+            System.out.println("Account <" + c.name() + "> now has $" + ret + " balance\n");
+        } catch (Exception e) {
+            stdExceptionPrinting(e, c.balance());
         }
         /* 
         //if your implementaion is correct, you can do the following with polymorphicarray accountList

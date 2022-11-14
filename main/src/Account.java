@@ -84,8 +84,10 @@ interface FullFunctionalAccount extends WithdrawableAccount,
 
 
 /**
- * Account Class
- * - Abstract class of account
+ * Abstract Class : Account
+ * 
+ * Description:
+ * Abstract class of account
  * 
  * Parameter Name
  * # accountName : String           - name of the account
@@ -140,15 +142,22 @@ public abstract class Account {
  * Derived class: CheckingAccount
  *
  * Description:
- * Interest is computed daily; there's no fee for
- * withdraw; there is a minimum balance of $1000.
+ * interest is computed daily; there's no fee for withdrawals; 
+ * there is a minimum balance of $1000.
+ * 
+ * Parameter Name:
+ * - defaultMinimumBalance, : double      - default minimum balance of the account
+ * - minimumBalance : double              - minimum balance of the account
+ * 
+ * Constructor:
+ * + CheckingAccount(String s, double firstDeposit) : CheckingAccount
+ * + CheckingAccount(String name, double balance, double interestRate, Date openDate)
  */
 
 class CheckingAccount extends Account implements FullFunctionalAccount {
     private final double defaultMinimumBalance = 1000.0;
     private double minimumBalance;
 
-    // constructor with default minimum balance and current date
     CheckingAccount(String s, double firstDeposit) {
         accountName = s;
         accountBalance = firstDeposit;
@@ -158,7 +167,6 @@ class CheckingAccount extends Account implements FullFunctionalAccount {
         minimumBalance = defaultMinimumBalance;
     }
 
-    // constructor with customized date and default minimum balance
     CheckingAccount(String s, double firstDeposit, Date firstDate) {
         accountName = s;
         accountBalance = firstDeposit;
@@ -168,7 +176,6 @@ class CheckingAccount extends Account implements FullFunctionalAccount {
         minimumBalance = defaultMinimumBalance;
     }
 
-    // constructor with customized date and minimum balance
     CheckingAccount(String s, double firstDeposit, Date firstDate, double _minimumBalance) {
         accountName = s;
         accountBalance = firstDeposit;
@@ -178,7 +185,6 @@ class CheckingAccount extends Account implements FullFunctionalAccount {
         minimumBalance = _minimumBalance;
     }
 
-    // deposit method with customized date
     public double deposit(double amount, Date deposiDate) throws BankingException {
         return super.deposit(amount);
     }

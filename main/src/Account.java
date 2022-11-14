@@ -14,6 +14,10 @@
 
 import java.util.*;
 
+/**
+ * Banking Excepotion Class
+ *  - This class is used to handle the exception of the banking system
+ **/
 class BankingException extends Exception {
     BankingException() {
         super();
@@ -24,72 +28,108 @@ class BankingException extends Exception {
     }
 }
 
-interface BasicAccount {
-    // Account name
-    String name();
 
-    // Account balance
+/**
+ * Basic Account Interface  
+ * - This interface is used to define the basic account
+ * - Contains two getter methods of name and account balance
+ **/
+interface BasicAccount {
+    String name();
     double balance();
 }
 
+/**
+ * Withdrawable Interface
+ * - This interface is used to define the method withdrawable account
+ * 
+ * Interface:
+ * withraw(double amount) : double
+ **/
 interface WithdrawableAccount extends BasicAccount {
     double withdraw(double amount) throws BankingException;
 }
 
+/**
+ * Depositable Interface
+ * - This interface is used to define the method of depositable account
+ * 
+ * Interface:
+ * deposit(double amount) : double
+ **/
 interface DepositableAccount extends BasicAccount {
     double deposit(double amount) throws BankingException;
 }
 
+/**
+ * Interestable Interface
+ * - This interface is used to define the method of interestable account
+ * 
+ * Interface:
+ * computerInterest() : double
+ **/
 interface InterestableAccount extends BasicAccount {
     double computeInterest() throws BankingException;
 }
 
+/**
+ * Full Function Account Interface
+ * - This interface is used to define the method of full function account
+ * - Contains withdraw, deposit, and interest method
+ */
 interface FullFunctionalAccount extends WithdrawableAccount,
         DepositableAccount,
         InterestableAccount {
 }
 
+
+/**
+ * Account Class
+ * - Abstract class of account
+ * 
+ * Parameter Name
+ * # accountName : String           - name of the account
+ * # accountBalance : double        - balance of the account
+ * # accountInterest : double       - interest of the account
+ * # openDate : Date                - open date of the account
+ * # lastInterestDate : Date        - last interest date of the account
+ * # defaultInterest : double       - default interest of the account
+ * 
+ * Method
+ * + name() : String
+ * + balance() : double
+ * + deposit(double amount) : double
+ * + withdraw(double amount) : double
+ * + withdraw(double amount, Date date) : double
+ * + computeInterest() : double
+ * + computerInterest(Date date) : double
+ */
 public abstract class Account {
 
-    // protected variables to store commom attributes for every bank accounts
-    protected String accountName; // name of the account
-    protected double accountBalance; // money in the account
-    protected double accountInterestRate; // the interest rate of this account
-    protected Date openDate; // the account open date
-    protected Date lastInterestDate; // last cal. interest data
-    protected double defaultInterstRate = 0.12; // interest rate
+    protected String accountName; 
+    protected double accountBalance; 
+    protected double accountInterestRate;
+    protected Date openDate;
+    protected Date lastInterestDate;
+    protected double defaultInterstRate = 0.12; 
 
-    // public methods for every bank accounts
+    public String name() { return (accountName); }
+    public double balance() { return (accountBalance); }
 
-    // return the name
-    public String name() {
-        return (accountName);
-    }
-
-    // return the balance
-    public double balance() {
-        return (accountBalance);
-    }
-
-    // deposit method
     public double deposit(double amount) throws BankingException {
         accountBalance += amount;
         return (accountBalance);
     }
 
-    // withdraw method with custmoized withdraw date
     abstract double withdraw(double amount, Date withdrawDate) throws BankingException;
 
-    // withdraw method with current date
     public double withdraw(double amount) throws BankingException {
         Date withdrawDate = new Date();
         return (withdraw(amount, withdrawDate));
     }
 
-    // compute interest method with customized interest date
     abstract double computeInterest(Date interestDate) throws BankingException;
 
-    // compute interest method with current date
     public double computeInterest() throws BankingException {
         Date interestDate = new Date();
         return (computeInterest(interestDate));

@@ -41,85 +41,83 @@ public class Application {
 
         /* put your own tests here ....... */
 
-        Account[] accountList;
-        accountList = new Account[4];
+        Account[] myAccountsList;
+        myAccountsList = new Account[4];
          
         // buid 4 different accounts in the same array
-        accountList[0] = new CheckingAccount("John Smith", 1500.0);
-        accountList[1] = new SavingAccount("William Hurt", 1200.0);
-        accountList[2] = new CDAccount("Woody Allison", 1000.0);
-        accountList[3] = new LoanAccount("Judi Foster", -1500.0);
+        myAccountsList[0] = new CheckingAccount("John Smith", 1500.0);
+        myAccountsList[1] = new SavingAccount("William Hurt", 1200.0);
+        myAccountsList[2] = new CDAccount("Woody Allison", 1000.0);
+        myAccountsList[3] = new LoanAccount("Judi Foster", -1500.0);
 
         
         // test each account functionality
-        System.out.println("Own Test");
-        System.out.println("========================================");
+        System.out.println("B10951003 Test");
+        System.out.println("==========================================================");
         
-        for (Account account : accountList) {
+        for (Account account : myAccountsList) {
             accountBalancePrinting(account);
             Calendar calendar = Calendar.getInstance();
-            System.out.println("Current's date is " + calendar.getTime());
-            d = calendar.getTime();
             
-
+        
             //simple withdraw test
-            System.out.println("Test Withdraw 3 times, each time => $200\n");
+            System.out.println("\n----------------------------------------------------------\n");
+            System.out.println("1. Simple withdraw test!");
+            System.out.println("-->Test Withdraw 4 times, each time withdraw $200\n");
+            System.out.println("----------------------------------------------------------");
+            for (int i = 1; i <= 4; i++) {
+                try {
+                    System.out.println("Current date => " + calendar.getTime());
+                    ret = account.withdraw(200.00, calendar.getTime());
+                    accountBalancePrinting(account);
+                } catch (Exception e) {
+                    stdExceptionPrinting(e, account.balance());	
+                }
+                calendar.add(Calendar.DATE, i * 10);
+            }
+
+
+            //large amount withdraw test
+            System.out.println("\n----------------------------------------------------------\n");
+            System.out.println("2.Large amount withdraw test!");
+            System.out.println("-->Test Withdraw $10000\n");
+            System.out.println("----------------------------------------------------------");
+
             try {
-                ret = account.withdraw(200.00);
+                System.out.println("Current date => " + calendar.getTime());
+                ret = account.withdraw(10000.00, calendar.getTime());
                 accountBalancePrinting(account);
-                ret = account.withdraw(200.00);
-                accountBalancePrinting(account);
-                ret = account.withdraw(200.00);
+            } catch (Exception e) {
+                stdExceptionPrinting(e, account.balance());	
+            }
+
+
+            //simple deposit test
+            System.out.println("\n----------------------------------------------------------\n");
+            System.out.println("3.Simple deposit test!");
+            System.out.println("-->Test Deposit 4 times, each time => $500\n");
+            System.out.println("----------------------------------------------------------");
+            for (int i = 1; i <= 4; i++) {
+                try {
+                    System.out.println("Current date => " + calendar.getTime());
+                    ret = account.deposit(500.00, calendar.getTime());
+                    accountBalancePrinting(account);
+                } catch (Exception e) {
+                    stdExceptionPrinting(e, account.balance());	
+                }
+            }
+
+            System.out.println("\n----------------------------------------------------------\n");
+            System.out.println("4.Interest test!\n");
+            System.out.println("----------------------------------------------------------");
+            try {
+                ret = account.computeInterest(calendar.getTime());
                 accountBalancePrinting(account);
             } catch (Exception e) {
                 stdExceptionPrinting(e, account.balance());
             }
-            System.out.println("");
-    
-            calendar.add(Calendar.MONDAY, 1);
-            System.out.println("After modify's date is " + calendar.getTime());
-            d = calendar.getTime();
 
-            //test must can't withdraw
-            System.out.println("Test Must Can't Withdraw, amount is => $10000\n");
-            try {
-                ret = account.withdraw(10000.00);
-                accountBalancePrinting(account);
-            } catch (Exception e) {
-                stdExceptionPrinting(e, account.balance());
-            }
-            System.out.println("");
-
-            calendar.add(Calendar.MONDAY, 1);
-            System.out.println("After modify's date is " + calendar.getTime());
-            d = calendar.getTime();
-
-            //test deposit
-            System.out.println("Test Deposit 3 times, each time => $600\n");
-            try {
-                ret = account.deposit(600.00);
-                accountBalancePrinting(account);
-                ret = account.deposit(600.00);
-                accountBalancePrinting(account);
-                ret = account.deposit(600.00);
-                accountBalancePrinting(account);
-            } catch (Exception e) {
-                stdExceptionPrinting(e, account.balance());
-            }
-            System.out.println("");
-
-            calendar.add(Calendar.MONDAY, 1);
-            System.out.println("After modify's date is " + calendar.getTime());
-            d = calendar.getTime();
-            
-            try {
-                ret = account.computeInterest(d);
-                accountBalancePrinting(account);
-            } catch (Exception e) {
-                stdExceptionPrinting(e, account.balance());
-            }
-
-            System.out.println("========================================");
+            System.out.println("==========================================================");
         }
 
         /* 

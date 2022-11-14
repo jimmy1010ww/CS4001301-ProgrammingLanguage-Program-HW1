@@ -1,0 +1,340 @@
+
+/*****************************************************************
+    CS4001301 Programming Languages                   
+    
+    Programming Assignment #1
+    
+    Java programming using subtype, subclass, and exception handling
+    
+    To compile: %> javac Application.java
+    
+    To execute: %> java Application
+
+******************************************************************/
+
+output : 
+
+Account <John Smith> now has $1400.0 balance
+
+EXCEPTION: Banking system throws a class BankingException with message: 
+        MESSAGE: Underfraft from Checking account
+        Account name: John Smith
+        Withdraw amount: 600.0
+        Minimum balance: 1000.0
+        Account balance remains $1500.0
+
+B10951003 Test
+==========================================================
+Account <John Smith> now has $1500.0 balance
+
+
+----------------------------------------------------------
+
+1. Simple withdraw test!
+-->Test Withdraw 4 times, each time withdraw $200
+
+----------------------------------------------------------
+Current date => Tue Nov 15 03:09:06 CST 2022
+Account <John Smith> now has $1300.0 balance
+
+Current date => Fri Nov 25 03:09:06 CST 2022
+Account <John Smith> now has $1100.0 balance
+
+Current date => Thu Dec 15 03:09:06 CST 2022
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: Underfraft from Checking account
+        Account name: John Smith
+        Withdraw amount: 200.0
+        Minimum balance: 1000.0
+        Account balance remains $1100.0
+
+Current date => Sat Jan 14 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: Underfraft from Checking account
+        Account name: John Smith
+        Withdraw amount: 200.0
+        Minimum balance: 1000.0
+        Account balance remains $1100.0
+
+
+----------------------------------------------------------
+
+2.Large amount withdraw test!
+-->Test Withdraw $10000
+
+----------------------------------------------------------
+Current date => Thu Feb 23 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: Underfraft from Checking account
+        Account name: John Smith
+        Withdraw amount: 10000.0
+        Minimum balance: 1000.0
+        Account balance remains $1100.0
+
+
+----------------------------------------------------------
+
+3.Simple deposit test!
+-->Test Deposit 4 times, each time => $500
+
+----------------------------------------------------------
+Current date => Thu Feb 23 03:09:06 CST 2023
+Account <John Smith> now has $1600.0 balance
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+Account <John Smith> now has $2100.0 balance
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+Account <John Smith> now has $2600.0 balance
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+Account <John Smith> now has $3100.0 balance
+
+
+----------------------------------------------------------
+
+4.Interest test!
+
+----------------------------------------------------------
+Number of days since last interest is 100
+Interest earned is 101.91780821917807
+Account <John Smith> now has $3201.917808219178 balance
+
+==========================================================
+Account <William Hurt> now has $1200.0 balance
+
+
+----------------------------------------------------------
+
+1. Simple withdraw test!
+-->Test Withdraw 4 times, each time withdraw $200
+
+----------------------------------------------------------
+Current date => Tue Nov 15 03:09:06 CST 2022
+Account <William Hurt> now has $1000.0 balance
+
+Current date => Fri Nov 25 03:09:06 CST 2022
+Account <William Hurt> now has $800.0 balance
+
+Current date => Thu Dec 15 03:09:06 CST 2022
+Account <William Hurt> now has $600.0 balance
+
+Current date => Sat Jan 14 03:09:06 CST 2023
+Account <William Hurt> now has $400.0 balance
+
+
+----------------------------------------------------------
+
+2.Large amount withdraw test!
+-->Test Withdraw $10000
+
+----------------------------------------------------------
+Current date => Thu Feb 23 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: Underfraft from Saving account
+        Account name: William Hurt
+        Withdraw amount: 10000.0
+        Account balance remains $400.0
+
+
+----------------------------------------------------------
+
+3.Simple deposit test!
+-->Test Deposit 4 times, each time => $500
+
+----------------------------------------------------------
+Current date => Thu Feb 23 03:09:06 CST 2023
+freeTransactionTimesCounter: 3
+Account <William Hurt> now has $900.0 balance
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+freeTransactionTimesCounter: 2
+Account <William Hurt> now has $1400.0 balance
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+freeTransactionTimesCounter: 1
+Account <William Hurt> now has $1900.0 balance
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+freeTransactionTimesCounter: 0
+You don't have enough free Transaction fee to withdraw, so we will take 1.0 from your account      
+Account <William Hurt> now has $2399.0 balance
+
+
+----------------------------------------------------------
+
+4.Interest test!
+
+----------------------------------------------------------
+Number of months since last interest is 3
+Interest earned is 71.97
+Account <William Hurt> now has $2470.97 balance
+
+==========================================================
+Account <Woody Allison> now has $1000.0 balance
+
+
+----------------------------------------------------------
+
+1. Simple withdraw test!
+-->Test Withdraw 4 times, each time withdraw $200
+
+----------------------------------------------------------
+Current date => Tue Nov 15 03:09:06 CST 2022
+Withdraw fee: 250.0
+Account <Woody Allison> now has $550.0 balance
+
+Current date => Fri Nov 25 03:09:06 CST 2022
+Withdraw fee: 250.0
+Account <Woody Allison> now has $100.0 balance
+
+Current date => Thu Dec 15 03:09:06 CST 2022
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: Underfraft from CD account
+        Account name: Woody Allison
+        Withdraw amount: 200.0
+        Account balance remains $100.0
+
+Current date => Sat Jan 14 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: Underfraft from CD account
+        Account name: Woody Allison
+        Withdraw amount: 200.0
+        Account balance remains $100.0
+
+
+----------------------------------------------------------
+
+2.Large amount withdraw test!
+-->Test Withdraw $10000
+
+----------------------------------------------------------
+Current date => Thu Feb 23 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: Underfraft from CD account
+        Account name: Woody Allison
+        Withdraw amount: 10000.0
+        Account balance remains $100.0
+
+
+----------------------------------------------------------
+
+3.Simple deposit test!
+-->Test Deposit 4 times, each time => $500
+
+----------------------------------------------------------
+Current date => Thu Feb 23 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't deposit in CD account !
+        Account name: Woody Allison
+        Account balance remains $100.0
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't deposit in CD account !
+        Account name: Woody Allison
+        Account balance remains $100.0
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't deposit in CD account !
+        Account name: Woody Allison
+        Account balance remains $100.0
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't deposit in CD account !
+        Account name: Woody Allison
+        Account balance remains $100.0
+
+
+----------------------------------------------------------
+
+4.Interest test!
+
+----------------------------------------------------------
+Number of months since last interest is 3
+Interest earned is 3.0
+Account <Woody Allison> now has $103.0 balance
+
+==========================================================
+Account <Judi Foster> now has $-1500.0 balance
+
+
+----------------------------------------------------------
+
+1. Simple withdraw test!
+-->Test Withdraw 4 times, each time withdraw $200
+
+----------------------------------------------------------
+Current date => Tue Nov 15 03:09:06 CST 2022
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't loan more money from Loan account !
+        Account name: Judi Foster
+        Account balance remains $-1500.0
+
+Current date => Fri Nov 25 03:09:06 CST 2022
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't loan more money from Loan account !
+        Account name: Judi Foster
+        Account balance remains $-1500.0
+
+Current date => Thu Dec 15 03:09:06 CST 2022
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't loan more money from Loan account !
+        Account name: Judi Foster
+        Account balance remains $-1500.0
+
+Current date => Sat Jan 14 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't loan more money from Loan account !
+        Account name: Judi Foster
+        Account balance remains $-1500.0
+
+
+----------------------------------------------------------
+
+2.Large amount withdraw test!
+-->Test Withdraw $10000
+
+----------------------------------------------------------
+Current date => Thu Feb 23 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't loan more money from Loan account !
+        Account name: Judi Foster
+        Account balance remains $-1500.0
+
+
+----------------------------------------------------------
+
+3.Simple deposit test!
+-->Test Deposit 4 times, each time => $500
+
+----------------------------------------------------------
+Current date => Thu Feb 23 03:09:06 CST 2023
+Account <Judi Foster> now has $-1000.0 balance
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+Account <Judi Foster> now has $-500.0 balance
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+Account <Judi Foster> now has $0.0 balance
+
+Current date => Thu Feb 23 03:09:06 CST 2023
+EXCEPTION: Banking system throws a class BankingException with message:
+        MESSAGE: You can't turn more money back to Loan account
+        Account name: Judi Foster
+        Deposit amount: 500.0
+        Account balance remains $0.0
+
+
+----------------------------------------------------------
+
+4.Interest test!
+
+----------------------------------------------------------
+Number of months since last interest is 3
+Interest earned is 0.0
+Account <Judi Foster> now has $0.0 balance
+
+==========================================================

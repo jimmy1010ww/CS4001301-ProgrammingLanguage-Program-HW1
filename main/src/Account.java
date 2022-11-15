@@ -282,7 +282,7 @@ class CheckingAccount extends Account implements FullFunctionalAccount {
 class SavingAccount extends Account implements FullFunctionalAccount {
     // define variable
     private final int defaultFreeTranscationTimes = 3;
-    private final double defaultTransactionFee = 1;
+    private final double defaultTransactionFee = 1.0;
 
     private int freeTransactionTimes;
     private double transactionFee;
@@ -543,6 +543,8 @@ class SavingAccount extends Account implements FullFunctionalAccount {
  * 
  * Mehtods:
  * # computeExpiredDate() : void                            - compute the expired date with current date
+ * + reActivate() : void                                    - re-activate the CD duration
+ * + reActivate(Date reActivateDate) : void                 - re-activate the CD duration with specific date
  * + getExpiredDate() : Date                                - get expired date
  * # isExpired() : boolean                                  - check if expired with current date
  * # isExpired(Date date) : boolean                         - check if expired with specific date
@@ -613,6 +615,19 @@ class CDAccount extends Account implements WithdrawableAccount, InterestableAcco
     protected void computeExpiredDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(openDate);
+        calendar.add(Calendar.MONTH, durationMonths);
+        expiredDate = calendar.getTime();
+    }
+
+    public void reActivate() {
+        reActivate(new Date());
+    }
+
+    public void reActivate(Date reActivateDate) {
+        computeInterestFlag = false;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(reActivateDate);
         calendar.add(Calendar.MONTH, durationMonths);
         expiredDate = calendar.getTime();
     }
@@ -696,13 +711,28 @@ class CDAccount extends Account implements WithdrawableAccount, InterestableAcco
             "Interest date: " + interestDate);
         }
         else if (isExpired(interestDate)) {
-            if (computeInterestFlag == true)
-            {
+            if (computeInterestFlag == true) {
                 throw new BankingException("Invalid date to compute interest from CD account" + '\n' + '\t' +
                 "Account name: " + accountName + '\n' + '\t' +
                 "Last interest date: " + lastInterestDate + '\n' + '\t' +
                 "Interest date: " + interestDate + '\n' + '\t' +
                 "Expired date: " + expiredDate);
+            }
+            else {
+                int numberOfMonths = durationMonths;
+                System.out.println("Number of months since last interest is " + numberOfMonths);
+                double interestEarned = (double) numberOfMonths / 12 *
+                        accountInterestRate * accountBalance;
+                System.out.println("Interest earned is " + interestEarned);
+                lastInterestDate = interestDate;
+                accountBalance += interestEarned;
+
+                if (isExpired(interestDate))
+                {
+                    computeInterestFlag = true;
+                }
+
+                return (accountBalance);
             }
         }
 

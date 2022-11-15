@@ -111,6 +111,12 @@ public class Application {
             System.out.println("4.Interest test!\n");
             System.out.println("----------------------------------------------------------");
             try {
+                calendar.add(Calendar.MONTH, 12);
+                System.out.println("Current date => " + calendar.getTime());
+                ret = account.computeInterest(calendar.getTime());
+                accountBalancePrinting(account);
+                calendar.add(Calendar.MONTH, 2);
+                System.out.println("Current date => " + calendar.getTime());
                 ret = account.computeInterest(calendar.getTime());
                 accountBalancePrinting(account);
             } catch (Exception e) {
